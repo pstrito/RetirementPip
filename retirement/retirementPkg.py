@@ -23,7 +23,7 @@ class retirement():
         
         #income after retirment
         how_much_ss_at_retirement = float(input('How much Social Security benefits per year will Fictitious Steve receive at retirement? [In thousands/year] '))
-        how_much_other_passive_income = float(input('Will Fictitious Steve have other passive income per year in retirement? [e.g. Pension, Rental Income, etc; In thousands of $] '))
+        how_much_other_passive_income = float(input('How much will Fictitious Steve have in other income per year in retirement? [e.g. Pension, Rental Income, etc; In thousands of $] '))
     
         #return on retirement savings
         rate_of_return = float(input('What is the annualized percent return (rate of return) on the retirement saving before retiring? '))
