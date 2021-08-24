@@ -2,12 +2,9 @@
 #TODO imports to init.py?
 
 class retirement():
- 
-    def __init__(self):
-        
-        self = "self"
- 
-    def var_input(self):
+     
+    @staticmethod
+    def var_input():
         import pandas as pd
         import numpy as np
         import time
