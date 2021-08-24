@@ -2,27 +2,13 @@
 #TODO imports to init.py?
 
 class retirement():
-    #Declare class variables
-    #---------------------
-    #declare dictionary (key:value)  to store ticker and associated html tables
-    #news_tables = {} 
-    
-    #declare list (array) to store arrays of parsed data
-    #     parsed_data = [] 
-    #     tickers = [] 
-    
-    #variables = []
-    #variable_names = []
-    
-    #---------------------
-    #constructor
-    #def __init__(self): #initializes global variables
-        
-    #self.url = 'https://www.finviz.com/quote.ashx?t='
-    #self.headers = {'Content-Type': 'application/json'}
  
     def var_input():
-    
+        import pandas as pd
+        import numpy as np
+        import time
+        from time import sleep
+        
         variables = []
         variable_names = []
     
@@ -128,12 +114,29 @@ class retirement():
         
             years_left = variables[6] - yr
         
-            final_principle, apr, soc_security, passive_retirement_income = annual_by_month_compound(variables, starting_principle, 
-                                                        additional_principle, debit, yr)
         
-            '''df = df.append({'APR': apr, 'Year Number': yr, 'Starting Balance': starting_principle, 
-                            'Ending Balance': final_principle, 'Additional Premium' : additional_premium, 
-                            'Debit' : debit} , ignore_index = True)'''
+            #defines gain through monthly compounding while taking into account additional principle
+                
+            if yr > variables[0]:
+                soc_security = variables[3]
+                passive_retirement_income = variables[4]
+            else: 
+                soc_security = 0
+                passive_retirement_income = 0
+            mpr = variables[5]/1200 # APR divided by 12 to get monthly interest rate
+            #print('mpr = ', mpr)
+            month = 1    
+            new_principle = starting_principle
+            #print('new_principle = ', new_principle, '\n')
+            while month < 13:
+                gain_from_interest_on_principle = new_principle * mpr
+                #print('gain_from_interest_on_principle =', gain_from_interest_on_principle)
+                new_principle = new_principle + gain_from_interest_on_principle + additional_principle/12 + debit/12 + soc_security/12 + passive_retirement_income/12
+                month += 1
+                new_principle = float(new_principle)
+            
+            final_principle = new_principle 
+            apr = variables[5]
         
             df = df.append({'years_to_retire': years_to_retire, 
                         'how_much_needed_at_retirement' : debit, 
@@ -145,8 +148,7 @@ class retirement():
                         'additional_principle': additional_principle, 
                         'inflation': inflat, 
                         'tax_rate': taxes, 
-                        'final_principle': final_principle}, 
-                        ignore_index = True)                           
+                        'final_principle': final_principle}, ignore_index = True)                           
         
             starting_principle = final_principle
         
@@ -154,32 +156,13 @@ class retirement():
         
         return df
     
-    #defines gain through monthly compounding while taking into account additional principle
-    def annual_by_month_compound(variables, starting_principle, additional_principle, debit, yr): #interest rate compounded monthly for one year
     
-        if yr > variables[0]:
-            soc_security = variables[3]
-            passive_retirement_income = variables[4]
-        else: 
-            soc_security = 0
-            passive_retirement_income = 0
-        mpr = variables[5]/1200 # APR divided by 12 to get monthly interest rate
-        #print('mpr = ', mpr)
-        month = 1    
-        new_principle = starting_principle
-        #print('new_principle = ', new_principle, '\n')
-        while month < 13:
-            gain_from_interest_on_principle = new_principle * mpr
-            #print('gain_from_interest_on_principle =', gain_from_interest_on_principle)
-            new_principle = new_principle + gain_from_interest_on_principle + additional_principle/12 + debit/12 + soc_security/12 + passive_retirement_income/12
-            month += 1
-            new_principle = float(new_principle)
-        return new_principle, variables[5], soc_security, passive_retirement_income
-
-    # 3d plot of the principle and needs over time
-
     # summarizes the data
     def summary(df):
+        
+        import sys
+        import time
+        from time import sleep
     
         #prints out a typewriter effect
         #https://stackoverflow.com/questions/19911346/create-a-typewriter-effect-animation-for-strings-in-python
