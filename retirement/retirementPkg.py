@@ -3,6 +3,10 @@
 
 class retirement():
  
+    def __init__(self):
+        
+        self = "self"
+ 
     def var_input(self):
         import pandas as pd
         import numpy as np
