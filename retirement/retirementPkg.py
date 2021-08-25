@@ -3,7 +3,7 @@
 
 class retirement():
      
-    @staticmethod
+    @staticmethod #This is added so that the interpreter does not add the variable "self" when this method is called in this class
     def var_input():
         import pandas as pd
         import numpy as np
@@ -88,6 +88,7 @@ class retirement():
         return variables, variable_names, df
 
     #determines the amount of gain over entirement retirement period (retirement to death)
+    @staticmethod
     def impact_years_compounding(variables, df):
         yr = 1
         starting_principle = variables[2]
@@ -159,6 +160,7 @@ class retirement():
     
     
     # summarizes the data
+    @staticmethod
     def summary(df):
         
         import sys
