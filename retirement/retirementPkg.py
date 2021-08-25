@@ -4,6 +4,24 @@
 class retirement():
      
     @staticmethod #This is added so that the interpreter does not add the variable "self" when this method is called in this class
+    def intro(): 
+        import time
+        from time import sleep
+        import sys
+
+        lines = ['This is a game to see if you can help Fictitious Steve or Fictitious Stephanie make his or her retirement savings last through retirement.',
+                 'This is just a fictitious game, no retirement or investment or any other decision(s) should ever be made',
+                 'based on the information in or from this game',
+                 'Have fun and see how you do!']
+
+    for line in lines:          # for each line of text (or each message)
+        for c in line:          # for each character in each line
+            print(c, end='')    # print a single character, and keep the cursor there.
+                sys.stdout.flush()  # flush the buffer
+                sleep(0.1)          # wait a little to make the effect look good.
+        print('')               # line break (optional, could also be part of the message)
+     
+    @staticmethod
     def var_input():
         import pandas as pd
         import numpy as np
