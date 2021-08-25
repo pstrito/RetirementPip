@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="retirement",
-    version="0.0.5",
+    version="0.0.6",
     author="Example Author",
     author_email="author@example.com",
     description="retirement calculations",
