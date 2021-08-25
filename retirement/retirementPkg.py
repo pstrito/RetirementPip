@@ -14,12 +14,12 @@ class retirement():
                  'based on the information in or from this game',
                  'Have fun and see how you do!']
 
-    for line in lines:          # for each line of text (or each message)
-        for c in line:          # for each character in each line
-            print(c, end='')    # print a single character, and keep the cursor there.
-            sys.stdout.flush()  # flush the buffer
-            sleep(0.1)          # wait a little to make the effect look good.
-        print('')               # line break (optional, could also be part of the message)
+        for line in lines:          # for each line of text (or each message)
+            for c in line:          # for each character in each line
+                print(c, end='')    # print a single character, and keep the cursor there.
+                sys.stdout.flush()  # flush the buffer
+                sleep(0.1)          # wait a little to make the effect look good.
+            print('')               # line break (optional, could also be part of the message)
      
     @staticmethod
     def var_input():
@@ -32,31 +32,31 @@ class retirement():
         variable_names = []
     
         #time to retirement
-        years_to_retire = int(input('\nFictitious Steve is planning to retire in how many years? '))
+        years_to_retire = int(input('\nFictitious Steve or Stephanie is planning to retire in how many years? '))
     
         #amount needed at retirement
-        how_much_needed_at_retirement = float(input('How much per year does Fictitious Steve need at retirement? [Annually; In thousands of $; After taxes.]'))
+        how_much_needed_at_retirement = float(input('How much per year does Fictitious Steve or Stephanie need at retirement? [Annually; In thousands of $; After taxes.]'))
     
         #current retirement savings
-        starting_principle = float(input('How much did Fictitious Steve have saved for retirement right now? [In thousands of $]'))
+        starting_principle = float(input('How much did Fictitious Steve or Stephanie have saved for retirement right now? [In thousands of $]'))
         
         #income after retirment
-        how_much_ss_at_retirement = float(input('How much Social Security benefits per year will Fictitious Steve receive at retirement? [In thousands/year] '))
-        how_much_other_passive_income = float(input('How much will Fictitious Steve have in other income per year in retirement? [e.g. Pension, Rental Income, etc; In thousands of $] '))
+        how_much_ss_at_retirement = float(input('How much Social Security benefits per year will Fictitious Steve or Stephanie receive at retirement? [In thousands/year] '))
+        how_much_other_passive_income = float(input('How much will Fictitious Steve or Stephanie have in other income per year in retirement? [e.g. Pension, Rental Income, etc; In thousands of $] '))
     
         #return on retirement savings
         rate_of_return = float(input('What is the annualized percent return (rate of return) on the retirement saving before retiring? '))
 
         #life expectance after retirement
-        yrs_to_death = input('How long does Fictitious Steve need retirement income? [press enter if you want 20 yrs.]')
+        yrs_to_death = input('How long does Fictitious Steve or Stephanie need retirement income? [press enter if you want 20 yrs.]')
         if yrs_to_death:
             yrs_to_death = float(yrs_to_death) + float(years_to_retire)
         else:
             yrs_to_death = float(20) + float(years_to_retire)
-            print('The time Fictitious Steve needs retirement income is for ', yrs_to_death - float(years_to_retire), 'years.')
+            print('The time Fictitious Steve or Stephanie needs retirement income is for ', yrs_to_death - float(years_to_retire), 'years.')
     
         #contribution to retirement savings before retiring    
-        additional_principle = float(input('How much will Fictitious Steve be adding to the retirement savings per year before retiring? '))
+        additional_principle = float(input('How much will Fictitious Steve or Stephanie be adding to the retirement savings per year before retiring? '))
 
         #inflation rate
         inflation = input('What is the inflation rate per year? [press enter if you want 3%.]')
@@ -67,7 +67,7 @@ class retirement():
             print('Based on your input the inflation rate is', inflation, '%.')
 
         #tax rate
-        tax_rate = input('Based on what Fictitious Steve needs, what will be the tax rate? [press enter if you want to assume 25% for both state and federal taxes.]')
+        tax_rate = input('Based on what Fictitious Steve or Stephanie needs, what will be the tax rate? [press enter if you want to assume 25% for both state and federal taxes.]')
         if tax_rate:
             tax_rate = float(tax_rate)
         else:
@@ -207,13 +207,13 @@ class retirement():
         
             if i == df.iloc[0,0] - 1: #defines the point when retirment starts
                 #print(i, df.iloc[0,0])
-                print('Congratulations, retirement has started! Fictitious Steve will start drawing from his retirement savings!!!')
+                print('Congratulations, retirement has started! Fictitious Steve or Stephanie will start drawing from his retirement savings!!!')
             
             if df.iloc[i,10] < 0: #defines the point when the retirement savings crosses into the negative
                 under_water = i - df.iloc[0,0] 
-                print("\nOhhhhh Noooooo .... Fictitious Steve's retirement savings ran out at between the", under_water , 'th and', under_water + 1 , 'th year of retirement!')
+                print("\nOhhhhh Noooooo .... Fictitious Steve's or Stephanie's retirement savings ran out at between the", under_water , 'th and', under_water + 1 , 'th year of retirement!')
                 time.sleep(2)
-                print('\nBUMMERS ... BUT ... since Fictitous Steve is an easy going guy and ... this is only a game, go back and change some of the conditions to see if you can make his retirement savings make it a bit farther!')
+                print('\nBUMMERS ... BUT ... since Fictitous Steve or Stephanie is an easy going person and ... this is only a game, go back and change some of the conditions to see if you can make his retirement savings make it a bit farther!')
                 break    
             #else:
                 #i = len(df) - 1
@@ -223,5 +223,5 @@ class retirement():
             i += 1
     
         if i == len(df):
-            print('\nYOU WON!!!! Fictitious Steve thanks you! The retirement savings lasted his entire retirement!!!!')
+            print('\nYOU WON!!!! Fictitious Steve or Stephanie thanks you! The retirement savings lasted his entire retirement!!!!')
 
