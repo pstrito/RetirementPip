@@ -207,7 +207,7 @@ class retirement():
         
             if i == df.iloc[0,0] - 1: #defines the point when retirment starts
                 #print(i, df.iloc[0,0])
-                print('Congratulations, retirement has started! Fictitious Steve or Stephanie will start drawing from his retirement savings!!!')
+                print('Congratulations, retirement has started! Fictitious Steve or Stephanie will start drawing from his or her retirement savings!!!')
             
             if df.iloc[i,10] < 0: #defines the point when the retirement savings crosses into the negative
                 under_water = i - df.iloc[0,0] 
@@ -223,5 +223,5 @@ class retirement():
             i += 1
     
         if i == len(df):
-            print('\nYOU WON!!!! Fictitious Steve or Stephanie thanks you! The retirement savings lasted his entire retirement!!!!')
+            print('\nYOU WON!!!! Fictitious Steve or Stephanie thanks you! The retirement savings lasted his or her entire retirement!!!!')
 
