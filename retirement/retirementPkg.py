@@ -9,16 +9,19 @@ class retirement():
         from time import sleep
         import sys
 
-        lines = ['This is a game to see if you can help Fictitious Steve or Fictitious Stephanie make his or her retirement savings last through retirement.',
-                 'This is just a fictitious game, no retirement or investment or any other decision(s) should ever be made',
-                 'based on the information in or from this game',
+        lines = ['This is a game to see if you can help Fictitious Steve or Fictitious Stephanie make his or her retirement savings last', 
+                 'through retirement.',
+                 ' ',
+                 'This is just a fictitious game, no retirement or investment or any other decision(s) should ever be made based on the',
+                 'information in or from this game',
+                 ' ',
                  'Have fun and see how you do!']
 
         for line in lines:          # for each line of text (or each message)
             for c in line:          # for each character in each line
                 print(c, end='')    # print a single character, and keep the cursor there.
                 sys.stdout.flush()  # flush the buffer
-                sleep(0.1)          # wait a little to make the effect look good.
+                sleep(0.05)         # wait a little to make the effect look good.
             print('')               # line break (optional, could also be part of the message)
      
     @staticmethod
@@ -194,7 +197,7 @@ class retirement():
             for c in line:          # for each character in each line
                 print(c, end='')    # print a single character, and keep the cursor there.
                 sys.stdout.flush()  # flush the buffer
-                sleep(0.1)          # wait a little to make the effect look good.
+                sleep(0.05)          # wait a little to make the effect look good.
             print('')               # line break (optional, could also be part of the message)
     
         time.sleep(2)
@@ -214,6 +217,8 @@ class retirement():
                 print("\nOhhhhh Noooooo .... Fictitious Steve's or Stephanie's retirement savings ran out at between the", under_water , 'th and', under_water + 1 , 'th year of retirement!')
                 time.sleep(2)
                 print('\nBUMMERS ... BUT ... since Fictitous Steve or Stephanie is an easy going person and ... this is only a game, go back and change some of the conditions to see if you can make his retirement savings make it a bit farther!')
+                print('\nTo play again just refresh this page! ')
+               
                 break    
             #else:
                 #i = len(df) - 1
@@ -224,4 +229,4 @@ class retirement():
     
         if i == len(df):
             print('\nYOU WON!!!! Fictitious Steve or Stephanie thanks you! The retirement savings lasted his or her entire retirement!!!!')
-
+            print('\nTo play again just refresh this page! ')
