@@ -59,7 +59,7 @@ class retirement():
             print('The time Fictitious Steve or Stephanie needs retirement income is for ', yrs_to_death - float(years_to_retire), 'years.')
     
         #contribution to retirement savings before retiring    
-        additional_principle = float(input('How much will Fictitious Steve or Stephanie be adding to the retirement savings per year before retiring? '))
+        additional_principle = float(input('How much will Fictitious Steve or Stephanie be adding to the retirement savings per year before retiring? [In thousands/year]'))
 
         #inflation rate
         inflation = input('What is the inflation rate per year? [press enter if you want 3%.]')
