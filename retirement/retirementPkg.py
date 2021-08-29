@@ -1,5 +1,4 @@
 # Variable input class
-#TODO imports to init.py?
 
 class retirement():
      
