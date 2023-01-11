@@ -1,4 +1,5 @@
 # Variable input class
+# Retirement package version 0.1.3
 
 class retirement():
      
@@ -20,7 +21,7 @@ class retirement():
             for c in line:          # for each character in each line
                 print(c, end='')    # print a single character, and keep the cursor there.
                 sys.stdout.flush()  # flush the buffer
-                sleep(0.05)         # wait a little to make the effect look good.
+                sleep(0.02)         # wait a little to make the effect look good.
             print('')               # line break (optional, could also be part of the message)
      
     @staticmethod
@@ -32,36 +33,44 @@ class retirement():
         
         variables = []
         variable_names = []
+        
+        #starting age
+        age = int(input('\nWhat is the age of either Fictitious Steve or Stephanie? '))
     
         #time to retirement
-        years_to_retire = int(input('\nFictitious Steve or Stephanie is planning to retire in how many years? '))
+        years_to_retire = int(input('Fictitious Steve or Stephanie is planning to retire in how many years? '))
     
         #amount needed at retirement
-        how_much_needed_at_retirement = float(input('How much per year does Fictitious Steve or Stephanie need at retirement? [Annually; In thousands of $; After taxes.]'))
-    
+        month_how_much_needed_at_retirement = float(input('How much per month does Fictitious Steve or Stephanie need at retirement? [In thousands of $; After taxes.] '))
+        how_much_needed_at_retirement = 12 * month_how_much_needed_at_retirement
+        
         #current retirement savings
-        starting_principle = float(input('How much did Fictitious Steve or Stephanie have saved for retirement right now? [In thousands of $]'))
+        starting_principle = float(input('How much did Fictitious Steve or Stephanie have saved for retirement right now? [In thousands of $] '))
         
         #income after retirment
-        how_much_ss_at_retirement = float(input('How much Social Security benefits per year will Fictitious Steve or Stephanie receive at retirement? [In thousands/year] '))
-        how_much_other_passive_income = float(input('How much will Fictitious Steve or Stephanie have in other income per year in retirement? [e.g. Pension, Rental Income, etc; In thousands of $] '))
+        month_how_much_ss_at_retirement = float(input('How much Social Security benefits per month will Fictitious Steve or Stephanie receive at retirement? [In thousands/month] '))
+        how_much_ss_at_retirement = 12 * month_how_much_ss_at_retirement
+        
+        month_how_much_other_passive_income = float(input('How much will Fictitious Steve or Stephanie have in other income per month in retirement? [e.g. Pension, Rental Income, etc; In thousands of $] '))
+        how_much_other_passive_income = 12 * month_how_much_other_passive_income / 1000
     
         #return on retirement savings
         rate_of_return = float(input('What is the annualized percent return (rate of return) on the retirement saving before retiring? '))
 
         #life expectance after retirement
-        yrs_to_death = input('How long does Fictitious Steve or Stephanie need retirement income? [press enter if you want 20 yrs.]')
+        yrs_to_death = input('How long does Fictitious Steve or Stephanie need retirement income? [press enter if you want 20 yrs.] ')
         if yrs_to_death:
             yrs_to_death = float(yrs_to_death) + float(years_to_retire)
         else:
             yrs_to_death = float(20) + float(years_to_retire)
-            print('The time Fictitious Steve or Stephanie needs retirement income is for ', yrs_to_death - float(years_to_retire), 'years.')
+            print('The time Fictitious Steve or Stephanie needs retirement income is for ', yrs_to_death - float(years_to_retire), 'years. ')
     
         #contribution to retirement savings before retiring    
-        additional_principle = float(input('How much will Fictitious Steve or Stephanie be adding to the retirement savings per year before retiring? [In thousands/year]'))
+        month_additional_principle = float(input("How much in $'s will Fictitious Steve or Stephanie be adding to the retirement savings per month before retiring? "))
+        additional_principle = 12 * month_additional_principle / 1000
 
         #inflation rate
-        inflation = input('What is the inflation rate per year? [press enter if you want 3%.]')
+        inflation = input('What is the inflation rate per year? [press enter if you want 3%.] ')
         if inflation:
             inflation = float(inflation)
         else:
@@ -69,7 +78,7 @@ class retirement():
             print('Based on your input the inflation rate is', inflation, '%.')
 
         #tax rate
-        tax_rate = input('Based on what Fictitious Steve or Stephanie needs, what will be the tax rate? [press enter if you want to assume 25% for both state and federal taxes.]')
+        tax_rate = input('Based on what Fictitious Steve or Stephanie needs, what will be the tax rate? [press enter if you want to assume 25% for both state and federal taxes.] ')
         if tax_rate:
             tax_rate = float(tax_rate)
         else:
@@ -80,12 +89,12 @@ class retirement():
     
         variables = [years_to_retire, how_much_needed_at_retirement, starting_principle,
                  how_much_ss_at_retirement, how_much_other_passive_income, rate_of_return,
-                 yrs_to_death, additional_principle, inflation, tax_rate, final_principle]
+                 yrs_to_death, additional_principle, inflation, tax_rate, final_principle, age]
     
         variable_names = ['years_to_retire', 'how_much_needed_at_retirement', 'starting_principle',
                  'how_much_ss_at_retirement', 'how_much_other_passive_income', 'rate_of_return',
                  'yrs_to_death', 'additional_principle', 'inflation', 'tax_rate', 
-                 'final_principle']
+                 'final_principle', 'age']
         ''' 
         legend 
         variables[0] = years_to_retire 
@@ -99,6 +108,7 @@ class retirement():
         variables[8] = inflation
         variables[9] = tax_rate
         variables[10] = final_principle
+        variables[11] = age
         '''
         df = pd.DataFrame(columns= ['years_to_retire', 'how_much_needed_at_retirement', 'starting_principle',
                  'how_much_ss_at_retirement', 'how_much_other_passive_income', 'rate_of_return',
@@ -110,6 +120,7 @@ class retirement():
     #determines the amount of gain over entirement retirement period (retirement to death)
     @staticmethod
     def impact_years_compounding(variables, df):
+        import pandas as pd
         yr = 1
         starting_principle = variables[2]
         while yr <= variables[6]: #calculates compounding across multiple years
@@ -136,7 +147,6 @@ class retirement():
         
             years_left = variables[6] - yr
         
-        
             #defines gain through monthly compounding while taking into account additional principle
                 
             if yr > variables[0]:
@@ -159,8 +169,8 @@ class retirement():
             
             final_principle = new_principle 
             apr = variables[5]
-        
-            df = df.append({'years_to_retire': years_to_retire, 
+                     
+            df1 = pd.DataFrame({'years_to_retire': years_to_retire, 
                         'how_much_needed_at_retirement' : debit, 
                         'starting_principle': variables[2],
                         'how_much_ss_at_retirement': soc_security, #variables[3] 
@@ -170,7 +180,9 @@ class retirement():
                         'additional_principle': additional_principle, 
                         'inflation': inflat, 
                         'tax_rate': taxes, 
-                        'final_principle': final_principle}, ignore_index = True)                           
+                        'final_principle': final_principle}, index = {1})
+            
+            df = pd.concat([df, df1]) 
         
             starting_principle = final_principle
         
@@ -196,16 +208,16 @@ class retirement():
             for c in line:          # for each character in each line
                 print(c, end='')    # print a single character, and keep the cursor there.
                 sys.stdout.flush()  # flush the buffer
-                sleep(0.05)          # wait a little to make the effect look good.
+                sleep(0.0)          # wait a little to make the effect look good.
             print('')               # line break (optional, could also be part of the message)
     
-        time.sleep(2)
+        #time.sleep(2)
     
         i = 0
         while i < len(df):
-            print('year', i+1 , 'Retirement Savings: $', int(df.iloc[i,10] * 1000)) #print out the year ending
+            print('year', i+1 , 'Retirement Savings: $', int(df.iloc[i,10] * 1000)) #prints out the year ending
         
-            time.sleep(1)
+            #time.sleep(0.5)
         
             if i == df.iloc[0,0] - 1: #defines the point when retirment starts
                 #print(i, df.iloc[0,0])
@@ -214,7 +226,7 @@ class retirement():
             if df.iloc[i,10] < 0: #defines the point when the retirement savings crosses into the negative
                 under_water = i - df.iloc[0,0] 
                 print("\nOhhhhh Noooooo .... Fictitious Steve's or Stephanie's retirement savings ran out at between the", under_water , 'th and', under_water + 1 , 'th year of retirement!')
-                time.sleep(2)
+                #time.sleep(.5)
                 print('\nBUMMERS ... BUT ... since Fictitous Steve or Stephanie is an easy going person and ... this is only a game, go back and change some of the conditions to see if you can make his retirement savings make it a bit farther!')
                 print('\nTo play again just refresh this page! ')
                
